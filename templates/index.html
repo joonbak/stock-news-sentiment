@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock News Sentiment</title>
+</head>
+
+<body>
+    <h1>Stock News Sentiment</h1>
+    <form action="{{ url_for('index')}}" method="post">
+        <input id="ticker" name="ticker" type="text" placeholder="Ticker Symbol" />
+        <button type="submit">Submit</button>
+    </form>
+    {{ ticker }}
+
+</body>
+
+</html>
