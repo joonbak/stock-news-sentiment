@@ -6,29 +6,46 @@ from transformers import pipeline
 app = Flask(__name__)
 
 ### ROUTES ###
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def index():
-    if request.method == 'POST':
-        ticker = request.form.get('ticker')
-        return render_template('index.html', ticker=ticker)
-
     return render_template('index.html')
+
+@app.route('/headlines', methods=['POST'])
+def headlines():
+    ticker = request.form.get('ticker')
+
+    data = get_headlines(ticker)
+    if data['success'] == False:
+        return render_template('error.html', data=data['error'])
+    
+    headlines = sentimental_analysis(data['headlines'])
+
+    return render_template('headlines.html', data=headlines)
 
 ### FUNCTIONS ###
 def get_headlines(ticker):
     url = f'https://finance.yahoo.com/rss/headline?s={ticker}'
 
-    feed = feedparser.parse(url)
-    news_headlines = []
+    try:
+        feed = feedparser.parse(url)
 
-    if not feed.entries:
-        print(f'Error passing ticker: {ticker}')
-    else:
-        for entry in feed.entries:
-            news_headlines.append([entry.title, entry.link])
+        if not feed.entries:
+            return {'success': False, 'error': 'Ticker Symbol not found.'}
 
-def sentimental_analysis(headlines):
+        news_headlines = [{'title': entry.title, 'link': entry.link} for entry in feed.entries]
+        
+        return {'success': True, 'headlines': news_headlines}
+    
+    except Exception as e:
+        return {'success': False, 'error': str(e)}
+
+def sentimental_analysis(news_headlines):
     pipe = pipeline('text-classification', model='ProsusAI/finbert')
+    for i, headline in enumerate(news_headlines):
+        sentiment = pipe(headline['title'])[0]
+        news_headlines[i].update(sentiment)
+    
+    return news_headlines
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
