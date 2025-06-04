@@ -7,8 +7,27 @@
     <title>Stock News Sentiment</title>
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <style>
+        body {
+            text-align: center;
+        }
+
         button {
             cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin: 12px;
+        }
+
+        .articles {
+            border-style: solid;
+            text-align: center;
+            padding: 8px;
         }
     </style>
 </head>
@@ -19,8 +38,9 @@
         <input id="ticker" name="ticker" type="text" placeholder="Ticker Symbol" />
         <button type="submit">Submit</button>
     </form>
-    <div id="headlines"></div>
+    <br />
     <div id="loading" class="htmx-indicator"><span>Loading...</span></div>
+    <div id="headlines"></div>
 </body>
 
 </html>

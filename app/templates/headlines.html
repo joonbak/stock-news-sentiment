@@ -1,3 +1,12 @@
-{% for headline in data %}
-<li>{{ headline }}</li>
-{% endfor %}
+<ul>
+    {% for headline in data %}
+    <li>
+        <div class="articles">
+            <h1>{{ headline.title }}</h1>
+            <p>{{ headline.label }}</p>
+            <p>{{ headline.score }}</p>
+            <a href="{{ headline.link }}" target="_blank" rel="noopener noreferrer">{{ headline.link }}</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
