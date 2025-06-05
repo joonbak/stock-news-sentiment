@@ -1,7 +1,47 @@
+<style>
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    li {
+        margin: 12px;
+    }
+
+    .articles {
+        border-style: solid;
+        text-align: center;
+        padding: 8px;
+    }
+
+    .articles h1 {
+        margin: 0;
+    }
+
+    .articles p {
+        margin: 5px 0;
+    }
+
+    .positive {
+        border-color: greenyellow;
+        background-color: #f0fff0;
+    }
+
+    .neutral {
+        border-color: gray;
+        background-color: #f4f4f4;
+    }
+
+    .negative {
+        border-color: red;
+        background-color: #fff0f0;
+    }
+</style>
+
 <ul>
     {% for headline in data %}
     <li>
-        <div class="articles">
+        <div class="articles {{ headline.label }}">
             <h1>{{ headline.title }}</h1>
             <p>{{ headline.label }}</p>
             <p>{{ headline.score }}</p>
