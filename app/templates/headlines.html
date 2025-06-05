@@ -8,10 +8,26 @@
         margin: 12px;
     }
 
+    p::first-letter {
+        text-transform: uppercase;
+    }
+
     .articles {
         border-style: solid;
         text-align: center;
         padding: 8px;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .articles:hover {
+        cursor: pointer;
+        transform: translateY(-10px) translateX(-10px);
+    }
+
+    .article-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
     }
 
     .articles h1 {
@@ -36,17 +52,30 @@
         border-color: red;
         background-color: #fff0f0;
     }
+
+    .positive:hover {
+        box-shadow: 8px 8px 0px rgba(173, 255, 47, 0.7);
+    }
+
+    .neutral:hover {
+        box-shadow: 8px 8px 0px rgba(128, 128, 128, 0.7);
+    }
+
+    .negative:hover {
+        box-shadow: 8px 8px 0px rgba(255, 0, 0, 0.7);
+    }
 </style>
 
 <ul>
     {% for headline in data %}
     <li>
-        <div class="articles {{ headline.label }}">
-            <h1>{{ headline.title }}</h1>
-            <p>{{ headline.label }}</p>
-            <p>{{ headline.score }}</p>
-            <a href="{{ headline.link }}" target="_blank" rel="noopener noreferrer">{{ headline.link }}</a>
-        </div>
+        <a href="{{ headline.link }}" target="_blank" rel="noopener noreferrer" class="article-link">
+            <div class="articles {{ headline.label }}">
+                <h1>{{ headline.title }}</h1>
+                <p>{{ headline.label }}</p>
+                <p>{{ headline.score }}</p>
+            </div>
+        </a>
     </li>
     {% endfor %}
 </ul>

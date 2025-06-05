@@ -8,6 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-EXPOSE 5000
+RUN python preload.py
 
 CMD [ "python", "app.py" ]

@@ -7,12 +7,35 @@
     <title>Stock News Sentiment</title>
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <style>
-        body {
+        * {
             text-align: center;
+            font-family: 'MesloLGS NF', monospace;
         }
 
         button {
             cursor: pointer;
+            font-size: 16px;
+            height: 36px;
+            border: solid;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.7);
+            transform: translateY(-5px);
+        }
+
+        input {
+            font-size: 16px;
+            height: 28px;
+            border: solid;
+            outline: none;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        input:hover {
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.7);
+            transform: translateY(-5px);
         }
     </style>
 </head>
