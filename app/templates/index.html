@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock News Sentiment</title>
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         * {
             text-align: center;
-            font-family: 'MesloLGS NF', monospace;
+            font-family: "JetBrains Mono", monospace;
         }
 
         button {
@@ -37,6 +38,36 @@
             box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.7);
             transform: translateY(-5px);
         }
+
+        .dots::after {
+            content: "";
+            display: inline-block;
+            width: 1em;
+            text-align: left;
+            animation: dots 1s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0% {
+                content: "";
+            }
+
+            25% {
+                content: ".";
+            }
+
+            50% {
+                content: "..";
+            }
+
+            75% {
+                content: "...";
+            }
+
+            100% {
+                content: "";
+            }
+        }
     </style>
 </head>
 
@@ -47,7 +78,7 @@
         <button type="submit">Submit</button>
     </form>
     <br />
-    <div id="loading" class="htmx-indicator"><span>Loading...</span></div>
+    <div id="loading" class="htmx-indicator">Loading<span class="dots"></span></div>
     <div id="headlines"></div>
 </body>
 
