@@ -20,10 +20,20 @@ variable "aws_ami_id" {
 
 variable "domain_name" {
     type = string
-    default = "jbfolio.com"
+    default = "example.com"
 }
 variable "record_name" {
     type = string
-    default = "sns"
+    default = "www"
     description = "Subdomain Name"
+}
+
+variable "key_pair_name" {
+    type = string
+    default = "awskey"
+}
+
+variable "public_key_path" {
+    type = string
+    default = "~/.ssh/awskey.pub"
 }

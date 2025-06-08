@@ -6,10 +6,16 @@ provider "aws" {
 resource "aws_instance" "app_server" {
     ami = var.aws_ami_id
     instance_type = var.ec2_instance_type
+    key_name = aws_key_pair.aws_key.key_name
 
     tags = {
         Name = var.instance_name
     }
+}
+
+resource "aws_key_pair" "aws_key" {
+    key_name   = var.key_pair_name
+    public_key = file(var.public_key_path)
 }
 
 resource "aws_eip" "app_server_eip" {
