@@ -11,6 +11,20 @@ resource "aws_instance" "app_server" {
     tags = {
         Name = var.instance_name
     }
+
+    user_data = <<EOF
+        #!/bin/bash
+        sudo yum update -y
+        sudo yum install -y amazon-linux-extras
+        sudo amazon-linux-extras install docker -y
+        sudo service docker start
+        sudo usermod -a -G docker ec2-user
+        sudo systemctl enable docker
+
+        sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+
+    EOF 
 }
 
 resource "aws_key_pair" "aws_key" {
