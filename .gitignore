@@ -1,3 +1,9 @@
 **/venv/
-infra/
+
 *.DS_Store
+
+infra/.terraform
+infra/.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+*.tfvars
