@@ -1,8 +1,0 @@
-instance_name = "StockNewsSentiment"
-aws_region = "ap-southeast-2"
-ec2_instance_type = "t2.micro"
-aws_ami_id = "ami-07b7cae50f732535f"
-domain_name = "jbfolio.com"
-record_name = "sns"
-key_pair_name = "awskey"
-public_key_path = "~/.ssh/awskey.pub"
