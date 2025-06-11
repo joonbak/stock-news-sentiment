@@ -8,6 +8,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN python preload_model.py
-
 CMD [ "gunicorn", "--bind", "0.0.0.0:5000", "app:app" ]

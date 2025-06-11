@@ -20,6 +20,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           source: "."
           target: "/home/${{ secrets.USER }}/stock-news-sentiment"
+          rm: true
 
       - name: Build and Run
         uses: appleboy/ssh-action@v1
@@ -30,5 +31,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /home/${{ secrets.USER }}/stock-news-sentiment
+            echo "HUGGINGFACE_API_TOKEN=${{ secrets.HF_API_TOKEN }}" > .env
+
             docker-compose down
             docker-compose up -d --build
