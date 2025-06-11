@@ -28,10 +28,10 @@ resource "aws_security_group" "allow_ssh_http_https" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
   security_group_id = aws_security_group.allow_ssh_http_https.id
-  cidr_ipv4 = "0.0.0.0/0"
+  cidr_ipv4 = var.cidr_ipv4
   ip_protocol = "tcp"
-  from_port = 22
-  to_port = 22
+  from_port = var.port
+  to_port = var.port
 }
 
 resource "aws_vpc_security_group_ingress_rule" "allow_http" {

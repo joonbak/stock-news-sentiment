@@ -37,3 +37,13 @@ variable "public_key_path" {
     type = string
     default = "~/.ssh/sshkey.pub"
 }
+
+variable "port" {
+    type = number
+    default = 22
+}
+
+variable "cidr_ipv4" {
+    type = string
+    default = "0.0.0.0/0"
+}
