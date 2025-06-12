@@ -1,30 +1,9 @@
 from flask import Flask, request, render_template
 
 import feedparser
-
-import requests
-import os
+from transformers import pipeline
 
 app = Flask(__name__)
-
-HF_API_URL = "https://router.huggingface.co/hf-inference/models/ProsusAI/finbert"
-HF_API_TOKEN = os.getenv("HF_API_TOKEN")  
-
-headers = {"Authorization": f"Bearer {os.environ['HF_API_TOKEN']}"}
-
-def run_inference_remote(text):
-    response = requests.post(
-        HF_API_URL,
-        headers=headers,
-        json={"inputs": text}
-    )
-    if response.status_code == 200:
-        predictions = response.json()[0]
-        best_pred = max(predictions, key=lambda x: x['score'])
-        return best_pred
-    else:
-        return {"label": "error", "score": 0.0, "error": response.text}
-
 
 ### ROUTES ###
 @app.route('/', methods=['GET'])
@@ -61,8 +40,9 @@ def get_headlines(ticker):
         return {'success': False, 'error': str(e)}
 
 def sentimental_analysis(news_headlines):
+    pipe = pipeline('text-classification', model='./models/ProsusAI/finbert/models--ProsusAI--finbert/snapshots/4556d13015211d73dccd3fdd39d39232506f3e43')
     for i, headline in enumerate(news_headlines):
-        sentiment = run_inference_remote(headline['title'])
+        sentiment = pipe(headline['title'])[0]
         news_headlines[i].update(sentiment)
     
     return news_headlines
