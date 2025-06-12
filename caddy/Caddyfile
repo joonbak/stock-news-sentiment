@@ -1,3 +1,3 @@
-sns.jbfolio.com {
+stock.jbfolio.com {
 	reverse_proxy flask:5000
 }
