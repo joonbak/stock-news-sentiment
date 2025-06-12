@@ -30,6 +30,10 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /home/${{ secrets.USER }}/stock-news-sentiment
+            echo "Stopping and removing existing containers..."
             docker-compose down
             docker system prune -a --volumes -f
+            docker rm -f caddy || true
+            docker rm -f flask || true
+            echo "Building and starting containers..."
             docker-compose up -d --build
