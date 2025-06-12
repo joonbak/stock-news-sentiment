@@ -15,5 +15,5 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo reboot
 
 cd /home/ec2-user
-mkdir stock-news-sentiment
+mkdir stock_news_sentiment
 
